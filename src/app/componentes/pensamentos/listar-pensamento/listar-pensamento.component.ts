@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Pensamento } from '../pensamento';
 import { PensamentoService } from '../pensamento.service';
+import { isThisTypeNode } from 'typescript';
 
 @Component({
   selector: 'app-listar-pensamento',
@@ -12,22 +13,31 @@ export class ListarPensamentoComponent implements OnInit {
 
   paginaAtual = 1;
   haMaisPensamentos: boolean = true;
+  filtro: string = '';
 
   constructor(private service: PensamentoService) { }
 
   ngOnInit(): void {
-    this.service.listar(this.paginaAtual).subscribe((pensamentos: Pensamento[]) => {
+    this.service.listar(this.paginaAtual, this.filtro).subscribe((pensamentos: Pensamento[]) => {
       this.listaPensamentos = pensamentos;
     });
   }
 
   carregarMaisPensamentos(){
-    this.service.listar(++this.paginaAtual).subscribe(listaPensamentos => {
+    this.service.listar(++this.paginaAtual, this.filtro).subscribe(listaPensamentos => {
       this.listaPensamentos.push(...listaPensamentos);
       if(!listaPensamentos.length) {
         this.haMaisPensamentos = false;
       }
     })
+  }
+
+  pesquisarPensamento(){
+    this.haMaisPensamentos = true;
+    this.paginaAtual = 1;
+    this.service.listar(this.paginaAtual, this.filtro).subscribe(listaPensamentos => {
+      this.listaPensamentos = listaPensamentos;
+    });
   }
 
 }
