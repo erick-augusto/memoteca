@@ -19,7 +19,8 @@ export class CriarPensamentosComponent implements OnInit {
     this.formulario = this.formBuilder.group({
       conteudo: ['', Validators.compose([Validators.required,Validators.pattern(/(.|\s)*\S(.|\s)*/)])],
       autoria: ['', Validators.compose([Validators.required,Validators.minLength(3)])],
-      modelo: ['modelo1']
+      modelo: ['modelo1'],
+      failvorito: [false]
     });
 
     //Forma opcional de criar o formulário
