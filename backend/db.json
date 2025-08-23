@@ -25,14 +25,14 @@
       "conteudo": "teste",
       "autoria": "eu",
       "modelo": "modelo3",
-      "favorito": false,
+      "favorito": true,
       "id": 4
     },
     {
       "conteudo": "novo teste em angular",
       "autoria": "eu",
       "modelo": "modelo3",
-      "favorito": false,
+      "favorito": true,
       "id": 5
     }
   ]
